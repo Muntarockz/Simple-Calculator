@@ -1,0 +1,93 @@
+import math
+
+# Basic arithmetic functions
+def add(x, y):
+    return x + y
+
+def subtract(x, y):
+    return x - y
+
+def multiply(x, y):
+    return x * y
+
+def divide(x, y):
+    if y == 0:
+        return "Error! Division by zero."
+    else:
+        return x / y
+
+# Trigonometric functions
+def sin(x):
+    return math.sin(math.radians(x))
+
+def cos(x):
+    return math.cos(math.radians(x))
+
+def tan(x):
+    if math.cos(math.radians(x)) == 0:
+        return "Error! Tangent undefined for 90 + k*180 degrees."
+    else:
+        return math.tan(math.radians(x))
+
+def cot(x):
+    if math.sin(math.radians(x)) == 0:
+        return "Error! Cotangent undefined for k*180 degrees."
+    else:
+        return 1 / math.tan(math.radians(x))
+
+# Main calculator loop
+print("Select operation:")
+print("1. Add")
+print("2. Subtract")
+print("3. Multiply")
+print("4. Divide")
+print("5. Sine")
+print("6. Cosine")
+print("7. Tangent")
+print("8. Cotangent")
+
+while True:
+    choice = input("Enter choice (1/2/3/4/5/6/7/8, or 'q' to quit): ")
+
+    if choice.lower() == 'q':
+        break
+
+    if choice in ('1', '2', '3', '4'):
+        try:
+            num1 = float(input("Enter first number: "))
+            num2 = float(input("Enter second number: "))
+
+            if choice == '1':
+                print(f"Result: {add(num1, num2):.2f}")
+            elif choice == '2':
+                print(f"Result: {subtract(num1, num2):.2f}")
+            elif choice == '3':
+                print(f"Result: {multiply(num1, num2):.2f}")
+            elif choice == '4':
+                result = divide(num1, num2)
+                if isinstance(result, str):
+                    print(result)
+                else:
+                    print(f"Result: {result:.2f}")
+        except ValueError:
+            print("Invalid input. Please enter numbers only.")
+
+    elif choice in ('5', '6', '7', '8'):
+        try:
+            angle = float(input("Enter angle in degrees: "))
+
+            if choice == '5':
+                print(f"Result: {sin(angle):.2f}")
+            elif choice == '6':
+                print(f"Result: {cos(angle):.2f}")
+            elif choice == '7':
+                result = tan(angle)
+                print(f"Result: {result:.2f}") if isinstance(result, float) else print(result)
+            elif choice == '8':
+                result = cot(angle)
+                print(f"Result: {result:.2f}") if isinstance(result, float) else print(result)
+        except ValueError:
+            print("Invalid input. Please enter a number for the angle.")
+
+    else:
+        print("Invalid choice.")
